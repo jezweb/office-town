@@ -16,23 +16,22 @@ Step-by-step deployment guide. Should take under 15 minutes if Goose is already 
 Clone, fork, or download `office-town/` to wherever you want the town to live.
 
 ```bash
-# Clone the template
 git clone <office-town-repo-url> ~/Documents/office-town
 cd ~/Documents/office-town
 ```
 
 If you've copied it manually (no git), just place the folder where you want it and skip the git steps below.
 
-## Step 2 — Install the role files
+## Step 2 — Install the core role files
 
-Goose discovers agent files (the `@-mentionable` roles) from specific paths. Install the five default roles:
+Goose discovers agent files (the `@-mentionable` roles) from specific paths. Install the four core roles:
 
 ```bash
-# Option A: copy them (simplest)
+# Option A: copy them (simplest, fully independent)
 mkdir -p ~/.agents/agents
 cp ~/Documents/office-town/roles/*.md ~/.agents/agents/
 
-# Option B: symlink them (keeps in sync with the template)
+# Option B: symlink (template edits flow through; useful while iterating)
 mkdir -p ~/.agents/agents
 for f in ~/Documents/office-town/roles/*.md; do
   [ "$(basename $f)" = "README.md" ] && continue
@@ -40,7 +39,7 @@ for f in ~/Documents/office-town/roles/*.md; do
 done
 ```
 
-After install, restart Goose. The `@-mention` autocomplete in any chat should now show: `@boss`, `@librarian`, `@worker`, `@scout`, `@anthro`.
+After install, restart Goose. The `@-mention` autocomplete in any chat should now show: `@boss`, `@librarian`, `@worker`, `@scout`.
 
 ## Step 3 — Verify the briefings load
 
@@ -54,7 +53,7 @@ Start a new chat (task). Type something like:
 
 > *"Who are you, where are you, and who lives next door?"*
 
-If the briefing is loading correctly, the response will identify the building (the Library), the role (librarian), and the adjacent buildings (Office, Workshop, Lookout, Post Office). If the response is generic ("I'm an AI assistant..."), the `.goosehints` file isn't being picked up — see Troubleshooting below.
+If the briefing is loading correctly, the response will identify the building (the Library), the role (librarian), and the adjacent buildings (Office, Workshop, Lookout). If the response is generic ("I'm an AI assistant..."), the `AGENTS.md` file isn't being picked up — see Troubleshooting below.
 
 ## Step 4 — Try a real task
 
@@ -68,13 +67,26 @@ A first interaction that exercises the structure:
 
 If all that worked, your town is alive.
 
-## Step 5 — Customise (gradual)
+## Step 5 — Install additional role packs (optional)
+
+If your team needs business / creative / technical roles, install the packs:
+
+```bash
+# Once role packs are published:
+goose plugin install jezweb/office-town-pack-business
+goose plugin install jezweb/office-town-pack-creative
+# ... etc
+```
+
+Each pack adds new agents to `@-mention` autocomplete. Restart Goose after install.
+
+## Step 6 — Customise (gradual)
 
 The defaults are starting points, not opinions you have to keep.
 
 ### Customise the briefings
 
-Each `buildings/<building>/.goosehints` can be edited per-deployment:
+Each `buildings/<building>/AGENTS.md` can be edited per-deployment:
 
 - Add specifics about your team's tools and conventions
 - Add or remove standing orders
@@ -97,21 +109,20 @@ If you symlinked the role files (Option B in Step 2), editing the template versi
 mkdir -p ~/Documents/office-town/buildings/studio
 mkdir -p ~/Documents/office-town/buildings/studio/{inbox,journal,findings,facts}
 touch ~/Documents/office-town/buildings/studio/inbox/.gitkeep
-# ... and so on
 ```
 
-Then write the briefing (`buildings/studio/.goosehints`) and the role file (`roles/designer.md`). Update other buildings' `.goosehints` to mention the new neighbour under "Adjacent buildings".
+Then write the briefing (`buildings/studio/AGENTS.md`) and the role file (`roles/designer.md`). Update other buildings' `AGENTS.md` to mention the new neighbour under "Adjacent buildings".
 
 ### Wire in extensions (MCP services)
 
 The buildings reference "services wired in" — these are MCP extensions you configure in Goose's settings:
 
-- Knowledge / substrate service (something to read/write your wiki content)
+- Wiki / knowledge service (something to read/write your wiki content)
+- Extractors for the librarian (email reader, CRM connector, web scraper, file extractor)
 - Web search (for the scout)
-- Email / Slack / iMessage (for the post office)
 - Domain-specific tools per role
 
-Office Town is opinionated about *structure* and not at all about *which services* you pick. Wire what makes sense for your team.
+Office Town is opinionated about *structure* and not at all about *which services* you pick. Wire what makes sense for your team. The Office Town Cloud backend (separately installable) provides Cloudflare-backed extensions for the common needs.
 
 ## Where your data lives
 
@@ -130,15 +141,30 @@ These are gitignored in the template (`.gitignore`) so the template stays clean.
 - Keep them gitignored (your data isn't versioned)
 - Remove them from `.gitignore` (your data IS versioned — useful if you want commit history of the town)
 
-If you're running across multiple machines, consider how to sync this data: shared filesystem, dedicated sync daemon (like the maintainer's own approach), or a central Goose server (see `BACKEND.md` when written).
+If you're running across multiple machines, consider how to sync this data: shared filesystem, dedicated sync daemon (goannad), or a central Goose server.
+
+## Also using Claude Code on the same town?
+
+`AGENTS.md` is the cross-tool standard — Goose, Cursor, Aider all read it natively. For Claude Code users on the same town, add a one-line `CLAUDE.md` to each building pointing at `AGENTS.md`:
+
+```bash
+for b in buildings/*/; do
+  cat > "$b/CLAUDE.md" << 'EOF'
+# CLAUDE.md
+See @AGENTS.md for the actual content.
+EOF
+done
+```
+
+One file per building, one line of content. Both tools see the same context.
 
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
 | `@librarian` (or other role) doesn't autocomplete | Role files not installed | Re-run Step 2; restart Goose |
-| Briefing doesn't load (response is generic) | `.goosehints` not detected | Confirm working directory is exactly `buildings/<building>/`; restart Goose |
-| Roles don't seem to know each other | Briefings reference roles that aren't installed | Make sure all five role files are in `~/.agents/agents/` |
+| Briefing doesn't load (response is generic) | `AGENTS.md` not detected | Confirm working directory is exactly `buildings/<building>/`; restart Goose |
+| Roles don't seem to know each other | Briefings reference roles that aren't installed | Make sure all four core role files are in `~/.agents/agents/` |
 | "Provider not configured" | LLM not set up | Goose Settings → Providers; add your API key |
 
 ## What to do next

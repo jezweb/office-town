@@ -17,19 +17,19 @@ office-town/
 ├── README.md           — this file
 ├── SETUP.md            — step-by-step deployment guide
 ├── METHODOLOGY.md      — the four primitives, vocabulary, conventions
+├── AGENTS.md           — town-level guide (loaded by Goose at town root)
 ├── LICENSE             — MIT
 ├── buildings/          — one folder per building (each is a Goose project)
 │   ├── office/         — The Office — the boss, dispatch, user interface
-│   ├── library/        — The Library — the librarian, knowledge curation
+│   ├── library/        — The Library — the librarian (extract + curate)
 │   ├── workshop/       — The Workshop — the worker, execution
-│   ├── lookout/        — The Lookout — the scout, outward scanning
-│   └── post-office/    — The Post Office — comms + machine ops
-├── roles/              — role definition files (Goose agents); copied to ~/.agents/agents/
+│   └── lookout/        — The Lookout — the scout, outward scanning
+├── roles/              — core role definition files (Goose agents)
 ├── playbooks/          — (TBD) recipes for common workflows
 └── skills/             — (TBD) markdown skills agents can load
 ```
 
-Each building folder has its own `.goosehints` (auto-loaded by Goose when working in that directory) plus the standard subfolders a role uses: `inbox/`, `journal/`, `findings/`, `facts/`.
+Each building folder has its own `AGENTS.md` (auto-loaded by Goose when working in that directory) plus the standard subfolders a role uses: `inbox/`, `journal/`, `findings/`, `facts/`.
 
 ## The four primitives
 
@@ -41,6 +41,26 @@ Each building folder has its own `.goosehints` (auto-loaded by Goose when workin
 | **Task** | A piece of work being done | A Goose session / chat |
 
 You **work at** a Place. You **delegate to** a Role. You **open** a Task. See `METHODOLOGY.md` for the full vocabulary.
+
+## The core roles (ships with this template)
+
+Four core roles cover the universal needs:
+
+- **boss** (The Office) — your primary contact; routes work
+- **librarian** (The Library) — extracts from external systems + curates the wiki
+- **worker** (The Workshop) — deep work, execution
+- **scout** (The Lookout) — outward scanning
+
+## Role packs (separately installable)
+
+Office Town distributes as composable plugins. Beyond the core four, install only what you need:
+
+- **office-town-pack-business** — estimator, project-manager, product-manager, marketer, writer
+- **office-town-pack-creative** — designer, copywriter, video-editor, web-designer
+- **office-town-pack-technical** — wordpress-specialist, hostmaster, devops, code-reviewer
+- **office-town-pack-comms** — helpdesk, social-poster, newsletter-editor
+
+Individual roles as `office-town-role-<name>` plugins. None require approval from a central marketplace — they're just git repos.
 
 ## How to deploy this for a new team
 
@@ -57,15 +77,16 @@ Customisation, troubleshooting, extension wiring, and multi-machine setup all in
 
 ## Status
 
-**v1 — usable.** Methodology, briefings, role files, and deployment guide are in place. The maintainer (Jezweb) is dogfooding before broader release. Playbooks and skills are TBD. Multi-machine / hosted-backend setup is documented but not yet automated. Expect refinements; the core structure is settled.
+**v1 — usable.** Methodology, briefings, core role files, and deployment guide are in place. The maintainer (Jezweb) is dogfooding before broader release. Role packs are planned; the Office Town Cloud backend (memory, kanban, search MCPs) is designed and being built. Expect refinements; the core structure is settled.
 
 ## Related
 
 - Goose: https://github.com/block/goose
 - Goosetown (Block's lightweight coordination layer): https://github.com/aaif-goose/goosetown
 - Gas Town (Steve Yegge's full coordination framework): https://github.com/gastownhall/gastown
+- AGENTS.md spec (file convention): https://agents.md/
 
-Office Town is a smaller, business-shaped sibling — same convergent shape (orchestrator, delegates, shared workspace), different vocabulary (business words instead of frontier-town themes).
+Office Town is a smaller, business-shaped sibling to the above — same convergent shape (orchestrator, delegates, shared workspace), different vocabulary (business words instead of frontier-town themes), with an extractive librarian as the growth engine.
 
 ## License
 
