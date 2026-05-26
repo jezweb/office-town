@@ -15,16 +15,18 @@ Office Town gives a small business (or any team) a vocabulary, a folder structur
 ```
 office-town/
 ├── README.md           — this file
+├── SETUP.md            — step-by-step deployment guide
 ├── METHODOLOGY.md      — the four primitives, vocabulary, conventions
+├── LICENSE             — MIT
 ├── buildings/          — one folder per building (each is a Goose project)
 │   ├── office/         — The Office — the boss, dispatch, user interface
 │   ├── library/        — The Library — the librarian, knowledge curation
 │   ├── workshop/       — The Workshop — the worker, execution
 │   ├── lookout/        — The Lookout — the scout, outward scanning
 │   └── post-office/    — The Post Office — comms + machine ops
-├── roles/              — (placeholder) role definition files (Goose agents)
-├── playbooks/          — (placeholder) recipes for common workflows
-└── skills/             — (placeholder) markdown skills agents can load
+├── roles/              — role definition files (Goose agents); copied to ~/.agents/agents/
+├── playbooks/          — (TBD) recipes for common workflows
+└── skills/             — (TBD) markdown skills agents can load
 ```
 
 Each building folder has its own `.goosehints` (auto-loaded by Goose when working in that directory) plus the standard subfolders a role uses: `inbox/`, `journal/`, `findings/`, `facts/`.
@@ -42,16 +44,20 @@ You **work at** a Place. You **delegate to** a Role. You **open** a Task. See `M
 
 ## How to deploy this for a new team
 
-1. **Clone or copy** this folder to wherever the team's town will live (locally on a Mac, on a shared filesystem, etc.)
-2. **Decide which role files (`*.md`) you'll use.** Default set covers boss, librarian, worker, scout, anthro. Each needs a Goose-compatible agent file in `~/.agents/agents/` (or wherever your Goose is configured to look)
-3. **Customise the briefings** in each building's `.goosehints` if needed (per-deployment specifics like which comms channels, which extensions)
-4. **Install Goose** (https://github.com/block/goose) — desktop or CLI
-5. **Wire in extensions (MCP services)** — anything the roles need: knowledge base, email, project management, etc.
-6. **Use it.** `cd` into a building and open Goose; the briefing auto-loads. Delegate to roles with `@-mention`. Work flows through the town.
+See **[SETUP.md](SETUP.md)** for the step-by-step walkthrough. Should take under 15 minutes if Goose is already installed.
+
+The short version:
+
+1. Clone or copy this folder where you want the town to live
+2. Install the role files (`cp roles/*.md ~/.agents/agents/`)
+3. Open Goose at one of the buildings (`cd buildings/library && goose`)
+4. Delegate to roles with `@-mention`
+
+Customisation, troubleshooting, extension wiring, and multi-machine setup all in SETUP.md.
 
 ## Status
 
-**Early.** This is a working template Jezweb (the maintainer) is dogfooding before sharing more widely. The structure is settled; the role files and playbooks are still being filled in. Expect changes.
+**v1 — usable.** Methodology, briefings, role files, and deployment guide are in place. The maintainer (Jezweb) is dogfooding before broader release. Playbooks and skills are TBD. Multi-machine / hosted-backend setup is documented but not yet automated. Expect refinements; the core structure is settled.
 
 ## Related
 
@@ -63,4 +69,4 @@ Office Town is a smaller, business-shaped sibling — same convergent shape (orc
 
 ## License
 
-TBD — Jezweb retains rights for now. Will likely open-source once dogfooded.
+MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Jezweb Pty Ltd. Permissive open license; use, modify, deploy as you see fit.
