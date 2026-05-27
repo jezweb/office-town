@@ -1,8 +1,6 @@
 # Office Town
 
-**AI agents that work like a team.** Four buildings, four roles, a wiki-backed substrate. Your agents stop guessing — they know the work.
-
-Office Town is a markdown methodology for AI agent fleets running on [Goose](https://github.com/block/goose) (or any Open Plugin Spec host) with a [Cloudflare Workers backend](https://github.com/jezweb/office-town-cloud).
+**Office Town adds team-shaped capabilities to [Goose](https://block.github.io/goose/)** — four addressable roles, a Cloudflare-backed wiki, and a set of role packs for different kinds of work. Your Goose stops being a single mega-agent and starts acting like a team that knows the work.
 
 ```
 your-town/
@@ -18,49 +16,43 @@ your-town/
 
 ## Get started
 
-**You already have a capable AI agent — Claude Code, Goose, OpenAI Codex, Aider, Cline, etc. Don't read setup docs. Tell your agent to install it.**
+You need Goose installed first — grab it from https://block.github.io/goose/ (Desktop or CLI both work). Once you have Goose:
 
-👉 [Open INSTALL.md](./INSTALL.md) — paste two prompts into your agent:
+👉 **[Open INSTALL.md](./INSTALL.md)** — paste two prompts into any capable AI agent (Goose itself, Claude Code, Aider, etc.). The agent deploys the Cloudflare backend, wires the plugin into Goose, sets up your first town.
 
-1. **Prompt A — Prerequisites** (~5-15 min) — checks Node, pnpm, wrangler, Cloudflare access, agent host. Doesn't touch Office Town.
-2. **Prompt B — Install Office Town** (~10-15 min) — deploys backend + wires plugin + creates first town.
+- **Prompt A** (~5-15 min) — checks toolchain + Cloudflare access
+- **Prompt B** (~10-15 min) — deploys backend + installs plugin + sets up town
+- **Connect a second machine** helper for laptop+desktop setups
 
-Plus a **Connect-second-machine** helper if you already have a town running and want a second device on it.
+Or [officetown.au](https://officetown.au) shows the same prompts in copy-friendly form.
 
-Or visit [officetown.au](https://officetown.au) for the same prompt in a copy-button-shaped form.
+For a manual step-by-step path (no AI agent assisting the install), see [SETUP.md](./SETUP.md).
 
-If you don't have a capable agent (or want a deterministic manual path), see [SETUP.md](./SETUP.md).
+## What this is
 
-## Or download Office Town Desktop
-
-A pre-configured macOS .app — signed + notarised, no warnings:
-
-```
-https://download.officetown.au/mac
-```
-
-Then run the same agent-install prompt from inside it. The .app is rebranded Goose with our icon + bundle ID, so any agent on macOS understands what it's looking at.
-
-## What you get after install
-
-- 4 addressable role agents: `@boss`, `@librarian`, `@worker`, `@scout`
-- A wiki MCP backed by FTS5 + Vectorize hybrid search
-- Files MCP, publish MCP, cron routines, dashboard
-- A pluggable role-pack catalogue: `pack-startup`, `pack-design`, `pack-hosting`, `pack-wordpress`, `pack-business`, `pack-cloudflare`, `pack-comms`, `pack-knowledge`
-- Cost: ~$2-5/month on Cloudflare at typical SMB volume
-
-## How it actually works
+A **methodology layer over Goose**. The methodology shape:
 
 | Primitive | Job |
 |---|---|
 | **Town** | Your installation — a folder that defines who, what, where |
 | **Place** (Building) | A workplace — Office, Library, Workshop, Lookout |
-| **Role** | A specialist agent — addressable by name |
+| **Role** | A specialist Goose agent — addressable by name |
 | **Task** | A discrete unit of work — routed from boss to a specialist |
 
-Each role is a markdown file with an `AGENTS.md` that Goose loads on session start. The wiki is the shared memory — entries have a universal sextet of frontmatter fields (`slug`, `kind`, `created`, `last_updated`, `last_edited_by`, `last_change_summary`) plus collection-specific fields.
+The **wiki MCP** runs on Cloudflare Workers. It's the team's shared memory — entries have a universal sextet of frontmatter fields (`slug`, `kind`, `created`, `last_updated`, `last_edited_by`, `last_change_summary`) plus collection-specific fields. Hybrid search (FTS5 + Vectorize) means agents find things by keyword AND by meaning.
 
 Deep dive: [METHODOLOGY.md](./METHODOLOGY.md).
+
+## What you get after install
+
+- 4 addressable Goose roles: `@boss`, `@librarian`, `@worker`, `@scout`
+- Wiki MCP (FTS5 + Vectorize hybrid search, 11 default collections)
+- Files MCP (R2-backed, signed share links)
+- Publish MCP (markdown → public page)
+- Cron routines (Goose Desktop poll model — runs while you're at your desk)
+- Web dashboard with town map + kanban + recently-updated
+- Pluggable role-pack catalogue: startup, design, hosting, wordpress, business, comms, cloudflare, knowledge
+- Cost: ~$2-5/month on Cloudflare at typical SMB volume
 
 ## Repo layout
 
@@ -68,10 +60,10 @@ Deep dive: [METHODOLOGY.md](./METHODOLOGY.md).
 office-town/
 ├── README.md           ← you are here
 ├── INSTALL.md          ← agent-paste install prompts (primary path)
-├── SETUP.md            ← manual fallback (deterministic, no agent needed)
+├── SETUP.md            ← manual fallback (deterministic, no agent)
 ├── METHODOLOGY.md      ← the why and how
 ├── AGENTS.md           ← town-level standing orders (Goose auto-loads)
-├── buildings/          ← 4 building folders, each with its own AGENTS.md
+├── buildings/          ← 4 building folders with AGENTS.md each
 ├── roles/              ← core role definitions
 └── LICENSE             ← MIT
 ```
@@ -81,9 +73,14 @@ office-town/
 | Repo | What |
 |---|---|
 | [office-town-cloud](https://github.com/jezweb/office-town-cloud) | Cloudflare Workers backend (wiki/files/publish/cron MCPs) |
-| [office-town-plugin](https://github.com/jezweb/office-town-plugin) | Open Plugin Spec plugin (roles + skills + recipes + hooks) |
-| [office-town-desktop](https://github.com/jezweb/office-town-desktop) | Custom Distribution of Goose Desktop (signed Mac .app) |
+| [office-town-plugin](https://github.com/jezweb/office-town-plugin) | Goose plugin (roles + skills + recipes + hooks) |
 | [office-town-pack-*](https://github.com/jezweb?tab=repositories&q=office-town-pack) | Role packs: startup, design, hosting, wordpress, business, cloudflare, comms, knowledge |
+
+## Why Goose
+
+[Goose](https://block.github.io/goose/) is the agent runtime we built this on. It's open-source (Apache 2.0), runs locally with whichever LLM provider you have keys for, ships with MCP support out of the box, and has an active community improving it. Office Town adds a methodology layer + cloud substrate; Goose does the actual agent work.
+
+If a different open-source agent runtime catches up with the right primitives (project-scoped agents, MCP, plugin systems), Office Town's plugin content is largely Open Plugin Spec compliant and could port. For v1.0 we ship for Goose.
 
 ## Licence
 
