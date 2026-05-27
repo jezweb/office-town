@@ -1,6 +1,8 @@
-# Setting up Office Town
+# Setting up Office Town — manual fallback
 
-Step-by-step deployment guide. Should take under 15 minutes if Goose is already installed.
+> **Most people should use [INSTALL.md](./INSTALL.md) instead** — paste a prompt into your AI agent, it does everything. This SETUP.md is the deterministic manual path for users without a capable agent, or who want to understand each step.
+
+Step-by-step deployment guide. ~15 minutes if Goose is already installed.
 
 ## Prerequisites
 

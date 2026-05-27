@@ -1,93 +1,89 @@
 # Office Town
 
-A deployable template for running an AI agent fleet using **Goose** with a structured, business-shaped methodology.
+**AI agents that work like a team.** Four buildings, four roles, a wiki-backed substrate. Your agents stop guessing — they know the work.
 
-Office Town gives a small business (or any team) a vocabulary, a folder structure, and a set of role briefings that let them run a coordinated team of AI agents the way they'd run a small office — a Library, a Workshop, a Lookout, and so on. Each building is a workplace; each role is a specialist; the user delegates to roles and the roles do the work.
+Office Town is a markdown methodology for AI agent fleets running on [Goose](https://github.com/block/goose) (or any Open Plugin Spec host) with a [Cloudflare Workers backend](https://github.com/jezweb/office-town-cloud).
 
-## Who this is for
+```
+your-town/
+├── buildings/
+│   ├── office/        # @boss — routes work, holds the thread
+│   ├── library/       # @librarian — extracts + curates the wiki
+│   ├── workshop/      # @worker — deep work
+│   └── lookout/       # @scout — outward scanning
+└── wiki/              # the shared substrate (11 default collections)
+```
 
-- Small and medium businesses adopting AI agent fleets and wanting structure instead of a single mega-agent
-- Teams using Goose (https://github.com/block/goose) who want a clear methodology layer on top
-- Anyone who's tired of "an agent" and wants a *team* of agents that know where they live, who they are, and when to hand work off
+---
 
-## What's in this folder
+## Get started
+
+**You already have a capable AI agent — Claude Code, Goose, OpenAI Codex, Aider, Cline, etc. Don't read setup docs. Tell your agent to install it.**
+
+👉 [Open INSTALL.md](./INSTALL.md) — three prompts to paste into your agent:
+
+1. **Full install** — deploys Cloudflare backend + sets up plugin + first town
+2. **Cloud-only** — just deploy the backend, you wire up the rest
+3. **Connect-existing** — wire a new machine to an existing town
+
+Or visit [officetown.au](https://officetown.au) for the same prompt in a copy-button-shaped form.
+
+If you don't have a capable agent (or want a deterministic manual path), see [SETUP.md](./SETUP.md).
+
+## Or download Office Town Desktop
+
+A pre-configured macOS .app — signed + notarised, no warnings:
+
+```
+https://download.officetown.au/mac
+```
+
+Then run the same agent-install prompt from inside it. The .app is rebranded Goose with our icon + bundle ID, so any agent on macOS understands what it's looking at.
+
+## What you get after install
+
+- 4 addressable role agents: `@boss`, `@librarian`, `@worker`, `@scout`
+- A wiki MCP backed by FTS5 + Vectorize hybrid search
+- Files MCP, publish MCP, cron routines, dashboard
+- A pluggable role-pack catalogue: `pack-startup`, `pack-design`, `pack-hosting`, `pack-wordpress`, `pack-business`, `pack-cloudflare`, `pack-comms`, `pack-knowledge`
+- Cost: ~$2-5/month on Cloudflare at typical SMB volume
+
+## How it actually works
+
+| Primitive | Job |
+|---|---|
+| **Town** | Your installation — a folder that defines who, what, where |
+| **Place** (Building) | A workplace — Office, Library, Workshop, Lookout |
+| **Role** | A specialist agent — addressable by name |
+| **Task** | A discrete unit of work — routed from boss to a specialist |
+
+Each role is a markdown file with an `AGENTS.md` that Goose loads on session start. The wiki is the shared memory — entries have a universal sextet of frontmatter fields (`slug`, `kind`, `created`, `last_updated`, `last_edited_by`, `last_change_summary`) plus collection-specific fields.
+
+Deep dive: [METHODOLOGY.md](./METHODOLOGY.md).
+
+## Repo layout
 
 ```
 office-town/
-├── README.md           — this file
-├── SETUP.md            — step-by-step deployment guide
-├── METHODOLOGY.md      — the four primitives, vocabulary, conventions
-├── AGENTS.md           — town-level guide (loaded by Goose at town root)
-├── LICENSE             — MIT
-├── buildings/          — one folder per building (each is a Goose project)
-│   ├── office/         — The Office — the boss, dispatch, user interface
-│   ├── library/        — The Library — the librarian (extract + curate)
-│   ├── workshop/       — The Workshop — the worker, execution
-│   └── lookout/        — The Lookout — the scout, outward scanning
-├── roles/              — core role definition files (Goose agents)
-├── playbooks/          — (TBD) recipes for common workflows
-└── skills/             — (TBD) markdown skills agents can load
+├── README.md           ← you are here
+├── INSTALL.md          ← agent-paste install prompts (primary path)
+├── SETUP.md            ← manual fallback (deterministic, no agent needed)
+├── METHODOLOGY.md      ← the why and how
+├── AGENTS.md           ← town-level standing orders (Goose auto-loads)
+├── buildings/          ← 4 building folders, each with its own AGENTS.md
+├── roles/              ← core role definitions
+└── LICENSE             ← MIT
 ```
 
-Each building folder has its own `AGENTS.md` (auto-loaded by Goose when working in that directory) plus the standard subfolders a role uses: `inbox/`, `journal/`, `findings/`, `facts/`.
+## Related repos
 
-## The four primitives
+| Repo | What |
+|---|---|
+| [office-town-cloud](https://github.com/jezweb/office-town-cloud) | Cloudflare Workers backend (wiki/files/publish/cron MCPs) |
+| [office-town-plugin](https://github.com/jezweb/office-town-plugin) | Open Plugin Spec plugin (roles + skills + recipes + hooks) |
+| [office-town-desktop](https://github.com/jezweb/office-town-desktop) | Custom Distribution of Goose Desktop (signed Mac .app) |
+| [office-town-pack-*](https://github.com/jezweb?tab=repositories&q=office-town-pack) | Role packs: startup, design, hosting, wordpress, business, cloudflare, comms, knowledge |
 
-| Word | What it is | Goose primitive |
-|---|---|---|
-| **Town** | The whole environment | The Office Town installation |
-| **Place** | A building, a workplace | A Goose project (working directory) |
-| **Role** | An identity, a job description | A Goose agent (`.md` file) |
-| **Task** | A piece of work being done | A Goose session / chat |
+## Licence
 
-You **work at** a Place. You **delegate to** a Role. You **open** a Task. See `METHODOLOGY.md` for the full vocabulary.
-
-## The core roles (ships with this template)
-
-Four core roles cover the universal needs:
-
-- **boss** (The Office) — your primary contact; routes work
-- **librarian** (The Library) — extracts from external systems + curates the wiki
-- **worker** (The Workshop) — deep work, execution
-- **scout** (The Lookout) — outward scanning
-
-## Role packs (separately installable)
-
-Office Town distributes as composable plugins. Beyond the core four, install only what you need:
-
-- **office-town-pack-business** — estimator, project-manager, product-manager, marketer, writer
-- **office-town-pack-creative** — designer, copywriter, video-editor, web-designer
-- **office-town-pack-technical** — wordpress-specialist, hostmaster, devops, code-reviewer
-- **office-town-pack-comms** — helpdesk, social-poster, newsletter-editor
-
-Individual roles as `office-town-role-<name>` plugins. None require approval from a central marketplace — they're just git repos.
-
-## How to deploy this for a new team
-
-See **[SETUP.md](SETUP.md)** for the step-by-step walkthrough. Should take under 15 minutes if Goose is already installed.
-
-The short version:
-
-1. Clone or copy this folder where you want the town to live
-2. Install the role files (`cp roles/*.md ~/.agents/agents/`)
-3. Open Goose at one of the buildings (`cd buildings/library && goose`)
-4. Delegate to roles with `@-mention`
-
-Customisation, troubleshooting, extension wiring, and multi-machine setup all in SETUP.md.
-
-## Status
-
-**v1 — usable.** Methodology, briefings, core role files, and deployment guide are in place. The maintainer (Jezweb) is dogfooding before broader release. Role packs are planned; the Office Town Cloud backend (memory, kanban, search MCPs) is designed and being built. Expect refinements; the core structure is settled.
-
-## Related
-
-- Goose: https://github.com/block/goose
-- Goosetown (Block's lightweight coordination layer): https://github.com/aaif-goose/goosetown
-- Gas Town (Steve Yegge's full coordination framework): https://github.com/gastownhall/gastown
-- AGENTS.md spec (file convention): https://agents.md/
-
-Office Town is a smaller, business-shaped sibling to the above — same convergent shape (orchestrator, delegates, shared workspace), different vocabulary (business words instead of frontier-town themes), with an extractive librarian as the growth engine.
-
-## License
-
-MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Jezweb Pty Ltd. Permissive open license; use, modify, deploy as you see fit.
+MIT. Use, modify, redistribute. © 2026 Jezweb Pty Ltd.
