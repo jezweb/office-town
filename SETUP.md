@@ -1,8 +1,8 @@
 # Setting up Office Town — manual fallback
 
-> **Most people should use [INSTALL.md](./INSTALL.md) instead** — paste two prompts into your AI agent, it does everything. This SETUP.md is the deterministic manual path for users without a capable agent, or who want to see every step explicitly.
+> **Most people should use [INSTALL.md](./INSTALL.md) instead** — paste one prompt into your AI agent, it does everything. This SETUP.md is the deterministic manual path for users without a capable agent, or who want to see every step explicitly.
 
-If you do have an agent (Claude Code, Goose, Aider, Cline, Cursor, etc.), close this file and use [INSTALL.md](./INSTALL.md). It does this same flow in ~25 minutes with zero clicks beyond pasting the prompts.
+If you do have an agent (Claude Code, Goose, Aider, Cline, Cursor, etc.), close this file and use [INSTALL.md](./INSTALL.md). It does this same flow in ~20-30 minutes with zero clicks beyond pasting the prompt.
 
 ---
 

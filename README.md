@@ -18,13 +18,11 @@ your-town/
 
 You need Goose installed first — grab it from https://block.github.io/goose/ (Desktop or CLI both work). Once you have Goose:
 
-👉 **[Open INSTALL.md](./INSTALL.md)** — paste two prompts into any capable AI agent (Goose itself, Claude Code, Aider, etc.). The agent deploys the Cloudflare backend, wires the plugin into Goose, sets up your first town.
+👉 **[Open INSTALL.md](./INSTALL.md)** — paste one prompt into any capable AI agent (Goose itself, Claude Code, Aider, etc.). The agent checks your toolchain, asks before installing anything missing, deploys the Cloudflare backend, wires the plugin into Goose, sets up your first town. ~20-30 minutes total.
 
-- **Prompt A** (~5-15 min) — checks toolchain + Cloudflare access
-- **Prompt B** (~10-15 min) — deploys backend + installs plugin + sets up town
-- **Connect a second machine** helper for laptop+desktop setups
+Plus a **Connect-second-machine** helper for laptop+desktop setups.
 
-Or [officetown.au](https://officetown.au) shows the same prompts in copy-friendly form.
+Or [officetown.au](https://officetown.au) shows the same prompt in copy-friendly form.
 
 For a manual step-by-step path (no AI agent assisting the install), see [SETUP.md](./SETUP.md).
 
