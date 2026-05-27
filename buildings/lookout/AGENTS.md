@@ -17,7 +17,7 @@ You are at **The Lookout**, Office Town's outward-facing building. The other bui
 - `journal/<YYYY-MM-DD>.md` — today's sweep notes
 - `findings/` — raw discoveries; permissive on what gets surfaced
 - `facts/` — stable facts about the outside world worth holding
-- `../library/wiki/` — the shared library (read; let the librarian graduate findings into it)
+- `../../wiki/` — the shared library (read; let the librarian graduate findings into it)
 
 ## Adjacent buildings — when to delegate
 
@@ -41,4 +41,4 @@ You are at **The Lookout**, Office Town's outward-facing building. The other bui
 - Configured per team
 
 ---
-*Auto-loaded by Goose when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*
+*Auto-loaded by your agent host (Goose, Claude Code, etc.) when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*

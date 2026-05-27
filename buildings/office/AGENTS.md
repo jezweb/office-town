@@ -17,7 +17,7 @@ You are at **The Office** (also called Town Hall), Office Town's dispatch and co
 - `journal/<YYYY-MM-DD>.md` — today's daybook (update as you go)
 - `findings/` — patterns worth surfacing
 - `facts/` — stable facts held across sessions
-- `../library/wiki/` — the shared library
+- `../../wiki/` — the shared library
 
 ## Adjacent buildings — when to delegate
 
@@ -42,4 +42,4 @@ To delegate, address the role directly (`@worker`, `@librarian`, `@scout`) or dr
 - Comms / scheduling / extractors — configured per team
 
 ---
-*Auto-loaded by Goose when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*
+*Auto-loaded by your agent host (Goose, Claude Code, etc.) when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*

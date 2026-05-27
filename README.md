@@ -20,11 +20,12 @@ your-town/
 
 **You already have a capable AI agent — Claude Code, Goose, OpenAI Codex, Aider, Cline, etc. Don't read setup docs. Tell your agent to install it.**
 
-👉 [Open INSTALL.md](./INSTALL.md) — three prompts to paste into your agent:
+👉 [Open INSTALL.md](./INSTALL.md) — paste two prompts into your agent:
 
-1. **Full install** — deploys Cloudflare backend + sets up plugin + first town
-2. **Cloud-only** — just deploy the backend, you wire up the rest
-3. **Connect-existing** — wire a new machine to an existing town
+1. **Prompt A — Prerequisites** (~5-15 min) — checks Node, pnpm, wrangler, Cloudflare access, agent host. Doesn't touch Office Town.
+2. **Prompt B — Install Office Town** (~10-15 min) — deploys backend + wires plugin + creates first town.
+
+Plus a **Connect-second-machine** helper if you already have a town running and want a second device on it.
 
 Or visit [officetown.au](https://officetown.au) for the same prompt in a copy-button-shaped form.
 

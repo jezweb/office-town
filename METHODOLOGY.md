@@ -153,7 +153,7 @@ office-town/
 ├── AGENTS.md           ← town-level guide (loaded at town root)
 ├── buildings/
 │   ├── office/
-│   │   ├── AGENTS.md             ← briefing, auto-loaded by Goose
+│   │   ├── AGENTS.md             ← briefing, auto-loaded by your agent host
 │   │   ├── inbox/                ← incoming requests from other roles
 │   │   ├── journal/              ← daily log (YYYY-MM-DD.md)
 │   │   ├── findings/             ← working papers
@@ -178,7 +178,7 @@ Things you'll want to set per team / per business:
 | Item | Where | Why |
 |---|---|---|
 | Voice / tone in personas | Each role's `.md` file | Match the team's communication style |
-| Wiki schema | `buildings/library/wiki/AGENTS.md` | Each business's knowledge has its own shape |
+| Wiki schema | `wiki/AGENTS.md` | Each business's knowledge has its own shape |
 | Building set | Add new folders under `buildings/` | New roles, new spaces |
 | Extension list | Goose config + per-building briefings | Different teams need different services |
 | Extractors wired into the librarian | Librarian's services section | Email reader, CRM connector, scraper — per deployment |

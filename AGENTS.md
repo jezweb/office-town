@@ -1,6 +1,6 @@
 # Office Town — town-level guide
 
-This file is auto-loaded by Goose when working at the town root. Each building has its own `AGENTS.md` with role-specific context.
+This file is auto-loaded by your agent host when working at the town root. Each building has its own `AGENTS.md` with role-specific context.
 
 ## What this is
 
@@ -11,7 +11,7 @@ A structured AI agent fleet running on Goose. Four core roles in four buildings:
 - **The Workshop** (`@worker`) — deep work, execution
 - **The Lookout** (`@scout`) — outward scanning
 
-Plus the wiki (`buildings/library/wiki/`) — the team's shared knowledge layer.
+Plus the wiki (`buildin../../wiki/`) — the team's shared knowledge layer.
 
 ## The four primitives
 

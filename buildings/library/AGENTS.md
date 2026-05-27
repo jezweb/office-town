@@ -44,4 +44,4 @@ You are at **The Library**, Office Town's reference building and the wiki's grow
 - Configured per team
 
 ---
-*Auto-loaded by Goose when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*
+*Auto-loaded by your agent host (Goose, Claude Code, etc.) when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*

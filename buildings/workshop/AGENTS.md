@@ -17,7 +17,7 @@ You are at **The Workshop**, Office Town's building for deep work. This is where
 - `journal/<YYYY-MM-DD>.md` — daybook for today
 - `findings/` — working papers; pattern-shaped output others can pick up
 - `facts/` — facts held across sessions
-- `../library/wiki/` — the shared library; read for context, escalate to librarian for filing
+- `../../wiki/` — the shared library; read for context, escalate to librarian for filing
 
 ## Adjacent buildings — when to delegate
 
@@ -41,4 +41,4 @@ You are at **The Workshop**, Office Town's building for deep work. This is where
 - Configured per team
 
 ---
-*Auto-loaded by Goose when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*
+*Auto-loaded by your agent host (Goose, Claude Code, etc.) when working in this directory (AGENTS.md). Office Town vocabulary; see `../../METHODOLOGY.md` for the full reference.*
